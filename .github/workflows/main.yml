@@ -23,7 +23,7 @@ jobs:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       run: |
         curl --request POST \
-        --url  \
+        --url $SLACK_WEBHOOK_URL \
         --header 'content-type: application/json' \
         --data '{
         "attachments": [{
