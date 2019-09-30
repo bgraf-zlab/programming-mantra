@@ -17,5 +17,18 @@ jobs:
         cat randomquote.html | sed -n 's/.*<meta property=\"og:title\" content=\"\([^"]*\)\">.*/> \1/p' >> quote.txt
     - name: print quote
       run: cat quote.txt
-    - name: print quote2
-      run: ls -la
+    
+    - name: Notify slack channel
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        curl --request POST \
+        --url  \
+        --header 'content-type: application/json' \
+        --data '{
+        "attachments": [{
+                          "author_name": "InspiringBot",
+                          "title": "Inspiring development quote of the day:",
+                          "text": "$(cat quote.txt)"
+                        }]
+        }'
