@@ -13,8 +13,8 @@ jobs:
       run: curl --silent -o randomquote.html http://www.defprogramming.com/random/
     - name: extract quote from html
       run: |
-        cat randomquote.html | sed -n 's/.*<meta property=\"og:description\" content=\"\([^"]\)\">.*/\1/p' > quote.txt
-        cat randomquote.html | sed -n 's/.*<meta property=\"og:title\" content=\"\([^"]\)\">.*/> \1/p' >> quote.txt
+        cat randomquote.html | sed -n 's/.*<meta property=\"og:description\" content=\"\([^"]*\)\">.*/\1/p' > quote.txt
+        cat randomquote.html | sed -n 's/.*<meta property=\"og:title\" content=\"\([^"]*\)\">.*/> \1/p' >> quote.txt
     - name: print quote
       run: cat quote.txt
     - name: print quote2
