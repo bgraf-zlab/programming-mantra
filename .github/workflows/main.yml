@@ -17,3 +17,5 @@ jobs:
         cat randomquote.html | sed -n 's/.*<meta property=\"og:title\" content=\"\([^"]\)\">.*/> \1/p' >> quote.txt
     - name: print quote
       run: cat quote.txt
+    - name: print quote2
+      run: ls -la
