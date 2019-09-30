@@ -25,10 +25,10 @@ jobs:
         curl --request POST \
         --url $SLACK_WEBHOOK_URL \
         --header 'content-type: application/json' \
-        --data '{
-        "attachments": [{
-                          "author_name": "InspiringBot",
-                          "title": "Inspiring development quote of the day:",
-                          "text": "$(cat quote.txt)"
+        --data "{
+        \"attachments\": [{
+                          \"author_name\": \"InspiringBot\",
+                          \"title\": \"Inspiring development quote of the day:\",
+                          \"text\": \"$(cat quote.txt)\"
                         }]
-        }'
+        }"
