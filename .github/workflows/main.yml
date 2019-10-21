@@ -1,8 +1,8 @@
 name: CI
 
-on:
-  schedule:
-  - cron: 23 7 * * 1-5 #UTC!
+on: push
+#   schedule:
+#   - cron: 23 7 * * 1-5 #UTC!
 
 jobs:
   build:
