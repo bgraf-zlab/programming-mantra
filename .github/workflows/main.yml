@@ -12,11 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: get quote
-      run: curl --silent -o randomquote.html http://www.defprogramming.com/random/
-    - name: extract quote from html
+      run: curl --silent -o quotes.json https://raw.githubusercontent.com/daviferreira/defprogramming.com/master/src/data/quotes.json
+    - name: extract quote from json
       run: |
-        cat randomquote.html | sed -n 's/.*<meta property=\"og:description\" content=\"\([^"]*\)\">.*/\1/p' > quote.txt
-        cat randomquote.html | sed -n 's/.*<meta property=\"og:title\" content=\"\([^"]*\)\">.*/-- \1/p' >> quote.txt
+        jq '. as $quotes | now | tostring | split(".") | join("") | tonumber as $num | $quotes | length as $size | $quotes[$num % $size] as $quote | { "quote": $quote.body, "by": $quote.authors | join(", ") } | @text "\(.quote)\n\(.by)"' quotes.json > quote.txt
     - name: print quote
       run: cat quote.txt
     
