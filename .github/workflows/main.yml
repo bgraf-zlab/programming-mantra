@@ -15,7 +15,7 @@ jobs:
       run: curl --silent -o quotes.json https://raw.githubusercontent.com/daviferreira/defprogramming.com/master/src/data/quotes.json
     - name: extract quote from json
       run: |
-        jq '. as $quotes | now | tostring | split(".") | join("") | tonumber as $num | $quotes | length as $size | $quotes[$num % $size] as $quote | { "quote": $quote.body, "by": $quote.authors | join(", ") } | @text "\(.quote)\n\(.by)"' quotes.json > quote.txt
+        jq -r '. as $quotes | now | tostring | split(".") | join("") | tonumber as $num | $quotes | length as $size | $quotes[$num % $size] as $quote | { "quote": $quote.body, "by": $quote.authors | join(", ") } | @text "\(.quote)\n\(.by)"' quotes.json > quote.txt
     - name: print quote
       run: cat quote.txt
     
